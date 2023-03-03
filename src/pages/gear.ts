@@ -1,5 +1,9 @@
+import { getCurrentBreakpoint } from '@finsweet/ts-utils';
+
 export const gear = () => {
   recommendedReads();
+  alignImages();
+  window.addEventListener('resize', alignImages);
 
   function recommendedReads() {
     const wrapper = document.querySelector('[data-recommended="wrapper"]');
@@ -32,5 +36,20 @@ export const gear = () => {
       // keep the item and decrement the remaining required
       numberRequired -= 1;
     });
+  }
+
+  function alignImages() {
+    const base = document.querySelector('.aspect_wrapper.is-square');
+    const toAlign = document.querySelector('.aspect_wrapper');
+    const currentBreakpoint = getCurrentBreakpoint();
+
+    if (currentBreakpoint === 'main' || currentBreakpoint === 'medium') {
+      const toAlignWidth = toAlign.offsetWidth;
+      const toAlignHeight = base.offsetHeight;
+
+      toAlign.style.paddingBottom = `${(toAlignHeight / toAlignWidth) * 100}%`;
+    } else {
+      toAlign.style.removeProperty('padding-bottom');
+    }
   }
 };
