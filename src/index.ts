@@ -2,6 +2,7 @@ import { about } from './pages/about';
 import { authors } from './pages/authors';
 import { gear } from './pages/gear';
 import { guides } from './pages/guides';
+import { search } from './pages/search';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -19,4 +20,5 @@ window.Webflow.push(() => {
   if (pathname.includes('/authors/')) authors();
   if (pathname.includes('/gear/')) gear();
   if (pathname.includes('/guides/')) guides();
+  if (pathname.includes('/search-results')) search();
 });
