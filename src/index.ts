@@ -1,7 +1,9 @@
-import { about } from './pages/about';
+import { initSplide } from '$utils/initSplide';
+
 import { authors } from './pages/authors';
 import { gear } from './pages/gear';
 import { guides } from './pages/guides';
+import { home } from './pages/home';
 import { search } from './pages/search';
 
 window.Webflow ||= [];
@@ -13,12 +15,23 @@ window.Webflow.push(() => {
     link.setAttribute('rel', follow);
   });
 
-  // run page specific code
   const { pathname } = window.location;
 
-  if (pathname.includes('/about')) about();
+  // add hidden input values
+  const hiddenInputs = [...document.querySelectorAll('input[type="hidden"]')];
+  hiddenInputs.forEach((input) => {
+    switch (input.name) {
+      case 'URL':
+        input.value = pathname;
+    }
+  });
+
+  // run page specific code
   if (pathname.includes('/authors/')) authors();
   if (pathname.includes('/gear/')) gear();
   if (pathname.includes('/guides/')) guides();
   if (pathname.includes('/search-results')) search();
+
+  const hasSplide = document.querySelector('.splide');
+  if (hasSplide) initSplide();
 });
