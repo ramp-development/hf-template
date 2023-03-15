@@ -39,7 +39,7 @@ export const gear = () => {
   }
 
   function alignImages() {
-    const base = document.querySelector('.aspect_wrapper.is-square');
+    const base = document.querySelector('.aspect_wrapper.is-author');
     const toAlign = document.querySelector('.aspect_wrapper');
     const currentBreakpoint = getCurrentBreakpoint();
 
