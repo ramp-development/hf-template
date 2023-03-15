@@ -2,8 +2,8 @@ import { getCurrentBreakpoint } from '@finsweet/ts-utils';
 
 export const gear = () => {
   recommendedReads();
-  alignImages();
-  window.addEventListener('resize', alignImages);
+  // alignImages();
+  // window.addEventListener('resize', alignImages);
 
   function recommendedReads() {
     const wrapper = document.querySelector('[data-recommended="wrapper"]');
