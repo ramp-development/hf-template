@@ -3,12 +3,14 @@ import { getCurrentBreakpoint } from '@finsweet/ts-utils';
 export const guides = () => {
   alignImages();
   window.addEventListener('resize', alignImages);
+  placeComponents();
 
   function alignImages() {
     const base = document.querySelector('.aspect_wrapper.is-square');
     const toAlign = document.querySelector('.aspect_wrapper');
     const currentBreakpoint = getCurrentBreakpoint();
 
+    if (!base || !toAlign) return;
     if (currentBreakpoint === 'main' || currentBreakpoint === 'medium') {
       const toAlignWidth = toAlign.offsetWidth;
       const toAlignHeight = base.offsetHeight;
@@ -17,5 +19,23 @@ export const guides = () => {
     } else {
       toAlign.style.removeProperty('padding-bottom');
     }
+  }
+
+  function placeComponents() {
+    const components = [...document.querySelectorAll('[fs-richtext-component]')];
+    components.forEach((component) => {
+      const type = component.getAttribute('fs-richtext-component');
+      const xpath = `//p[text()='{{${type}}}']`;
+      const toReplace = document.evaluate(
+        xpath,
+        document,
+        null,
+        XPathResult.FIRST_ORDERED_NODE_TYPE,
+        null
+      ).singleNodeValue;
+
+      if (!toReplace) return;
+      toReplace.replaceWith(component);
+    });
   }
 };
