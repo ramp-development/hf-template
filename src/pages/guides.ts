@@ -1,9 +1,14 @@
-import { getCurrentBreakpoint } from '@finsweet/ts-utils';
+import { getCurrentBreakpoint, simulateEvent } from '@finsweet/ts-utils';
 
 export const guides = () => {
   alignImages();
   window.addEventListener('resize', alignImages);
   placeComponents();
+
+  setTimeout(() => {
+    const navModalTrigger = document.querySelector('[data-nav-modal="trigger"]');
+    simulateEvent(navModalTrigger, 'click');
+  }, 10000);
 
   function alignImages() {
     const base = document.querySelector('.aspect_wrapper.is-square');
