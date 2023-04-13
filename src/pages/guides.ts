@@ -6,8 +6,12 @@ export const guides = () => {
   placeComponents();
 
   setTimeout(() => {
+    const modalTriggered = sessionStorage.getItem('modalTriggered');
+    if (modalTriggered) return;
+
     const navModalTrigger = document.querySelector('[data-nav-modal="trigger"]');
     simulateEvent(navModalTrigger, 'click');
+    sessionStorage.setItem('modalTriggered', 'true');
   }, 10000);
 
   function alignImages() {
