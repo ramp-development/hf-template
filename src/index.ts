@@ -5,6 +5,7 @@ import { gear } from './pages/gear';
 import { guides } from './pages/guides';
 import { home } from './pages/home';
 import { search } from './pages/search';
+import { tags } from './pages/tags';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -27,10 +28,23 @@ window.Webflow.push(() => {
   });
 
   // run page specific code
-  if (pathname.includes('/authors/')) authors();
-  if (pathname.includes('/gear/')) gear();
-  if (pathname.includes('/guides/')) guides();
-  if (pathname.includes('/search-results')) search();
+  if (pathname.includes('/authors/')) {
+    authors();
+  } else if (pathname.includes('/gear/')) {
+    gear();
+  } else if (pathname.includes('/guides/')) {
+    guides();
+  } else if (pathname === '/search-results') {
+    search();
+  } else if (
+    pathname === '/skiing' ||
+    pathname === '/snowboarding' ||
+    pathname === '/mountaineering' ||
+    pathname === '/climbing' ||
+    pathname === '/hiking'
+  ) {
+    tags();
+  }
 
   const hasSplide = document.querySelector('.splide');
   if (hasSplide) initSplide();
